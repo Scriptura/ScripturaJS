@@ -19,8 +19,8 @@ INSERT INTO _number_option VALUE('', 'Olivier', '100');
 
 
 -- insertion de données via .csv
-LOAD DATA LOCAL INFILE '/Users/olivierchavarin/Documents/Archives/web/Scriptura/ScripturaJS/resources/persons.csv'
-INTO TABLE _person
+LOAD DATA LOCAL INFILE '/Users/olivierchavarin/Documents/Archives/web/Scriptura/ScripturaJS/resources/posts.csv'
+INTO TABLE _post
 FIELDS
 	TERMINATED BY '`'
 	ENCLOSED BY ''

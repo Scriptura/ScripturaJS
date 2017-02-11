@@ -136,12 +136,12 @@ CREATE TABLE IF NOT EXISTS `_post` (
     `meta_description` VARCHAR(255) NULL,
     `excerpt` VARCHAR(255) NULL,
     `author_id` BIGINT UNSIGNED NOT NULL,
-    `contributor_id` VARCHAR(255) NULL,
+    `contributors_id` VARCHAR(255) NULL,
     `status` TINYINT(1) UNSIGNED NOT NULL,
     `comments_status` TINYINT(1) UNSIGNED NOT NULL,
     `comments_count` SMALLINT UNSIGNED NULL,
     `keywords_id` VARCHAR(255) NULL,
-    `medias` VARCHAR(255) NULL,
+    `medias_id` VARCHAR(255) NULL,
     PRIMARY KEY (id)
 )  ENGINE=INNODB;
 

@@ -40,7 +40,7 @@ if (config.dev){
 
 app.get('/', (req, res) => {
   //res.status(200) // 304 par défaut
-  let sql = 'SELECT * FROM _number_option WHERE id = \'1\''
+  let sql = 'SELECT * FROM _number_option WHERE id = \'1\'' // ça sert à rien pour l'instant...
   connection.query(sql, (error, results, fields) => {
     let rs = results[0]
     if (error) throw error
@@ -58,15 +58,15 @@ app.get('/', (req, res) => {
   })
 })
 
-app.get('/article/:id([0-9]{1,7})', (req, res) => { // @example `http://192.168.0.13:9001/article/1`
-  let sql = 'SELECT name, meta_title, meta_description, content FROM _post WHERE id = ?'
+app.get('/article/:id([0-9]{1,7})', (req, res) => { // @example `http://site.com/article/1`
+  let sql = 'SELECT * FROM _post WHERE id = ?'
     , inserts = req.params.id
   sql = mysql.format(sql, inserts)
   connection.query(sql, (error, results, fields) => {
     let rs = results[0]
     if (error) throw error
     if (rs) { // si résultat retourné
-      res.render('patternLayouts',
+      res.render('article',
         {
           dev: config.dev
           , currentArticle: rs.id
@@ -84,7 +84,7 @@ app.get('/article/:id([0-9]{1,7})', (req, res) => { // @example `http://192.168.
   })
 })
 
-app.get('/person/:name([0-9a-zA-Z]{1,20})', (req, res) => { // @example `http://192.168.0.13:9001/person/Lucas`
+app.get('/person/:name([0-9a-zA-Z]{1,20})', (req, res) => { // @example `http://site.com/person/Lucas`
   let sql = 'SELECT given_name, family_name, honorific_prefix, honorific_suffix FROM _person WHERE given_name = ?'
     , inserts = req.params.name
   sql = mysql.format(sql, inserts)
