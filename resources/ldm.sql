@@ -134,6 +134,7 @@ CREATE TABLE IF NOT EXISTS `_post` (
     `canonical_url` VARCHAR(255) NULL,
     `meta_title` VARCHAR(255) NULL,
     `meta_description` VARCHAR(255) NULL,
+    `description` VARCHAR(255) NULL,
     `excerpt` VARCHAR(255) NULL,
     `author_id` BIGINT UNSIGNED NOT NULL,
     `contributors_id` VARCHAR(255) NULL,

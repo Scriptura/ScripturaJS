@@ -29,6 +29,7 @@
 'use strict'
 
 exports.dev = true
+exports.demo = true
 exports.scheme = 'http://'
 exports.host = '127.0.0.1'
 exports.port = 9000 // ou `process.env.port || 9000`
@@ -37,3 +38,5 @@ exports.uri = exports.scheme + exports.host + ':' + exports.port
 exports.user = 'root'
 exports.password = 'root'
 exports.database = 'test'
+exports.name = 'Scriptura.js'
+exports.description = 'Interface for web apps'

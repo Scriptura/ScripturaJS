@@ -8,7 +8,7 @@ nav.main-nav(role='navigation')
       span
     ul
       li
-        if homepage
+        if (url === '/')
           span.active
             span.icon-home.only-icon
             span Home
@@ -17,7 +17,7 @@ nav.main-nav(role='navigation')
             span.icon-home.only-icon
             span Home
       li
-        if currentArticle == 1
+        if (url === '/article/1')
           span.active
             span.icon-list2
             | Article 1
@@ -26,7 +26,7 @@ nav.main-nav(role='navigation')
             span.icon-list2
             | Article 1
       li
-        if currentUser == 1
+        if (url === '/person/Victor')
           span.active
             span.icon-user
             | Person 1
@@ -35,7 +35,7 @@ nav.main-nav(role='navigation')
             span.icon-user
             | Person 1
       li
-        if currentUser == 1
+        if (url === '/person/Laetitia')
           span.active
             span.icon-user
             | Person 2
@@ -43,15 +43,6 @@ nav.main-nav(role='navigation')
           a(href='/person/Laetitia')
             span.icon-user
             | Person 2
-      li
-        if themespage
-          span.active
-            span.icon-rocket
-            | Themes
-        else
-          a(href='/Pages/Themes.html')
-            span.icon-rocket
-            | Themes
       li
         a(href='/404')
           span.icon-warning

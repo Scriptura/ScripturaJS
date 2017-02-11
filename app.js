@@ -40,41 +40,46 @@ if (config.dev){
 
 app.get('/', (req, res) => {
   //res.status(200) // 304 par défaut
-  let sql = 'SELECT * FROM _number_option WHERE id = \'1\'' // ça sert à rien pour l'instant...
+  let sql = 'SELECT * FROM _number_option WHERE id = \'1\''
   connection.query(sql, (error, results, fields) => {
     let rs = results[0]
+      , url = req.url
     if (error) throw error
     res.render('patternLayouts',
       {
         dev: config.dev
-        , demo: true
+        , url: url
+        , demo: config.demo
         , siteUri: config.uri
-        , title: 'Scriptura.js'
-        , description: 'Interface for web apps'
-        , name: 'Scriptura.js'
-        , content: 'Interface for web apps'
+        , title: config.name
+        , description: config.description
+        , name: config.name
+        , content: config.description
       }
     )
   })
 })
 
-app.get('/article/:id([0-9]{1,7})', (req, res) => { // @example `http://site.com/article/1`
+app.get('/article/:id([0-9]{1,7})', (req, res) => { // @example '/article/1'
   let sql = 'SELECT * FROM _post WHERE id = ?'
     , inserts = req.params.id
   sql = mysql.format(sql, inserts)
   connection.query(sql, (error, results, fields) => {
     let rs = results[0]
+      , url = req.url
     if (error) throw error
-    if (rs) { // si résultat retourné
+    if (rs) {
       res.render('article',
         {
           dev: config.dev
-          , currentArticle: rs.id
-          , demo: true
+          , url: url
+          , id: rs.id
+          , demo: config.demo
           , siteUri: config.uri
-          , title: rs.meta_title // @old req.params.id
-          , description: rs.meta_description
-          , name: rs.name // @old req.params.name
+          , title: rs.meta_title
+          , metaDescription: rs.meta_description
+          , description: rs.description
+          , name: rs.name
           , content: rs.content
         }
       )
@@ -84,24 +89,27 @@ app.get('/article/:id([0-9]{1,7})', (req, res) => { // @example `http://site.com
   })
 })
 
-app.get('/person/:name([0-9a-zA-Z]{1,20})', (req, res) => { // @example `http://site.com/person/Lucas`
-  let sql = 'SELECT given_name, family_name, honorific_prefix, honorific_suffix FROM _person WHERE given_name = ?'
+app.get('/person/:name([0-9a-zA-Z]{1,20})', (req, res) => { // @example '/person/Lucas'
+  let sql = 'SELECT * FROM _person WHERE given_name = ?'
     , inserts = req.params.name
   sql = mysql.format(sql, inserts)
   connection.query(sql, (error, results, fields) => {
     let rs = results[0]
+      , url = req.url
     if (error) throw error
-    if (rs) { // si résultat retourné
-      res.render('patternLayouts',
+    if (rs) {
+      res.render('person',
         {
           dev: config.dev
-          , currentUser: rs.id
-          , demo: true
+          , url: url
+          , id: rs.id
+          , demo: config.demo
           , siteUri: config.uri
-          , title: rs.given_name // @old req.params.id
-          , description: rs.family_name
-          , name: rs.honorific_prefix + ' ' + rs.given_name + ' ' + rs.family_name + ', ' + rs.honorific_suffix // @old req.params.name
-          , content: rs.given_name
+          , title: rs.given_name
+          , description: rs.description
+          , givenName : rs.given_name
+          , familyName : rs.family_name
+          , name: rs.honorific_prefix + ' ' + rs.given_name + ' ' + rs.family_name + ', ' + rs.honorific_suffix
         }
       )
     } else {
@@ -110,14 +118,14 @@ app.get('/person/:name([0-9a-zA-Z]{1,20})', (req, res) => { // @example `http://
   })
 })
 
-app.get('*', error404) // si l'URL ne correspond a aucune des routes précédentes
+app.get('*', error404) // récupération des URLs ne correspondant a aucune des routes précédentes
 
 function error404(req, res) {
   res.status(404)
   res.render('patternLayouts',
     {
       dev: config.dev
-      , demo: true
+      , demo: config.demo
       , siteUri: config.uri
       , title: 'Error 404'
       , description: 'Error 404, Page not found'
@@ -131,7 +139,8 @@ function error404(req, res) {
 const server = app.listen(config.port, config.host, logSuccess) // démarrage d'un serveur, raccourci avec express.js
 
 function logSuccess() {
-  // @link http://stackoverflow.com/questions/9781218/how-to-change-node-jss-console-font-color
+  // for change Node.js console font color:
+  // @link http://stackoverflow.com/questions/9781218
   console.log(
     '\x1b[32m' + '\n' +
     '     OxxO' + '\n' +
