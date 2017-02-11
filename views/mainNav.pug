@@ -1,0 +1,62 @@
+nav.main-nav(role='navigation')
+  .wrap
+    .brand-image.onaline
+      a(href='/')
+        span Scriptura
+    input(type='checkbox', id='cmd-main-nav')
+    label(for='cmd-main-nav')
+      span
+    ul
+      li
+        if homepage
+          span.active
+            span.icon-home.only-icon
+            span Home
+        else
+          a(href='/')
+            span.icon-home.only-icon
+            span Home
+      li
+        if currentArticle == 1
+          span.active
+            span.icon-list2
+            | Article 1
+        else
+          a(href='/article/1')
+            span.icon-list2
+            | Article 1
+      li
+        if currentUser == 1
+          span.active
+            span.icon-user
+            | Person 1
+        else
+          a(href='/person/Victor')
+            span.icon-user
+            | Person 1
+      li
+        if currentUser == 1
+          span.active
+            span.icon-user
+            | Person 2
+        else
+          a(href='/person/Laetitia')
+            span.icon-user
+            | Person 2
+      li
+        if themespage
+          span.active
+            span.icon-rocket
+            | Themes
+        else
+          a(href='/Pages/Themes.html')
+            span.icon-rocket
+            | Themes
+      li
+        a(href='/404')
+          span.icon-warning
+          | Error 404
+      li.item-push
+        a(href='//github.com/Scriptura/ScripturaJS')
+          span.icon-github
+          | Repository
