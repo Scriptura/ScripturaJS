@@ -5,6 +5,7 @@ __Project in development ...__
 
 * A framework for Node.js
 * MVC architecture
+* MySQL database
 * Template engines with Pug.js
 * Style sheets generated with Stylus
 
