@@ -1,6 +1,8 @@
 # ScripturaJS
 > Interface for web apps
 
+__Project in development ...__
+
 * A framework for Node.js
 * MVC architecture
 * Template engines with Pug.js
