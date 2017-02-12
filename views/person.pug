@@ -4,30 +4,54 @@ block content
   main(itemprop='mainContentOfPage')
     .section
       .wrap
-        h1(itemprop='headline name').emphasized= name
+        h1(itemprop='headline name').emphasized= db[0].honorific_prefix + ' ' + db[0].given_name + ' ' + db[0].family_name + ', ' + db[0].honorific_suffix
         ul.list-stripe.summary
-          li Id: #{id}
-          li Given Name: #{givenName}
-          li Family Name: #{familyName}
-          li Additional Name: #{additionalName}
-          li Honorific Prefix: #{honorificPrefix}
-          li Honorific Suffix: #{honorificSuffix}
-          li Birth Date: #{birthDate}
-          li Birth Place Id: #{birthPlaceId}
-          li Death Date: #{deathDate}
-          li Death Place Id: #{deathPlaceId}
-          li Nationality: #{nationality}
-          li Place Id: #{placeId}
-          li Telephone: #{telephone}
-          li Telephone2: #{telephone2}
-          li Email: #{email}
-          li Fax: #{fax}
-          //-li Url: #{url}
-          li Occupation: #{occupation}
-          li Bias: #{bias}
-          li Hobby: #{hobby}
-          li Organization Id: #{organizationId}
-          li Awward: #{awward}
-          li Medias Id: #{mediasId}
-          li Signature: #{signature}
-        p= description
+          li Id: 
+            = db[0].id
+          li Given Name: 
+            = db[0].given_name
+          li Family Name: 
+            = db[0].family_name
+          li Additional Name: 
+            = db[0].additional_name
+          li Honorific Prefix: 
+            = db[0].honorific_prefix
+          li Honorific Suffix: 
+            = db[0].honorific_suffix
+          li Birth Date: 
+            = db[0].birth_date
+          li Birth Place Id: 
+            = db[0].birth_place_id
+          li Death Date: 
+            = db[0].death_date
+          li Death Place Id: 
+            = db[0].death_place_id
+          li Nationality: 
+            = db[0].nationality
+          li Place Id: 
+            = db[0].place_id
+          li Telephone: 
+            = db[0].telephone
+          li Telephone2: 
+            = db[0].telephone2
+          li Email: 
+            = db[0].email
+          li Fax: 
+            = db[0].fax
+          li Url: 
+            = db[0].url
+          li Occupation: 
+            = db[0].occupation
+          li Bias: 
+            = db[0].bias
+          li Hobby: 
+            = db[0].hobby
+          li Organization Id: 
+            = db[0].organization_id
+          li Award: 
+            = db[0].award
+          li Medias Id: 
+            = db[0].medias_id
+          li Signature: 
+            = db[0].signature
+        p= db[0].description

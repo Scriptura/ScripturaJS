@@ -42,7 +42,8 @@ app.get('/', (req, res) => {
   //res.status(200) // 304 par défaut
   let sql = 'SELECT * FROM _post WHERE id = \'1\''
   connection.query(sql, (error, results, fields) => {
-    let url = req.url
+    let db = results
+      , url = req.url
     if (error) throw error
     res.render('patternLayouts',
       {
@@ -64,34 +65,19 @@ app.get('/article/:id([0-9]{1,7})', (req, res) => { // @example '/article/1'
     , inserts = req.params.id
   sql = mysql.format(sql, inserts)
   connection.query(sql, (error, results, fields) => {
-    let url = req.url
+    let db = results
+      , url = req.url
     if (error) throw error
-    if (results[0]) {
+    if (db) {
       res.render('article',
         {
-          dev: config.dev
+          db: db
+          , dev: config.dev
           , url: url
           , demo: config.demo
           , siteUri: config.uri
-          , id: results[0].id
-          , name: results[0].name
-          , content: results[0].content
-          , dateCreated: results[0].date_created
-          , dateModified: results[0].date_modified
-          , datePublished: results[0].date_published
-          , type: results[0].type
-          , slug: results[0].slug
-          , metaTitle: results[0].meta_title
-          , metaDescription: results[0].meta_description
-          , description: results[0].description
-          , excerpt: results[0].excerpt
-          , authorId: results[0].author_id
-          , contributorsId: results[0].contributors_id
-          , status: results[0].status
-          , commentsStatus: results[0].comments_status
-          , commentsCount: results[0].comments_count
-          , keywordsId: results[0].keywords_id
-          , mediasId: results[0].medias_id
+          , metaTitle: db[0].name
+          , metaDescription: db[0].description
         }
       )
     } else {
@@ -106,41 +92,18 @@ app.get('/person/:name([0-9a-zA-Z]{1,20})', (req, res) => { // @example '/person
   sql = mysql.format(sql, inserts)
   connection.query(sql, (error, results, fields) => {
     let url = req.url
+      , db = results
     if (error) throw error
-    if (results[0]) {
+    if (db) {
       res.render('person',
         {
-          dev: config.dev
+          db: db
+          , dev: config.dev
           , url: url
           , demo: config.demo
           , siteUri: config.uri
-          , name: results[0].honorific_prefix + ' ' + results[0].given_name + ' ' + results[0].family_name + ', ' + results[0].honorific_suffix
-          , id: results[0].id
-          , metaTitle: results[0].given_name
-          , givenName: results[0].given_name
-          , familyName: results[0].family_name
-          , additionalName: results[0].additional_name
-          , honorificPrefix: results[0].honorific_prefix
-          , honorificSuffix: results[0].honorific_suffix
-          , birthDate: results[0].birth_date
-          , birthPlaceId: results[0].birth_place_id
-          , deathDate: results[0].death_date
-          , deathPlaceId: results[0].death_place_id
-          , nationality: results[0].nationality
-          , placeId: results[0].place_id
-          , telephone: results[0].telephone
-          , telephone2: results[0].telephone2
-          , email: results[0].email
-          , fax: results[0].fax
-          //, url: results[0].url
-          , occupation: results[0].occupation
-          , bias: results[0].bias
-          , hobby: results[0].hobby
-          , organizationId: results[0].organization_id
-          , awward: results[0].awward
-          , mediasId: results[0].medias_id
-          , signature: results[0].signature
-          , description: results[0].description
+          , metaTitle: 'Fiche de ' + db[0].given_name + ' ' + db[0].family_name
+          , metaDescription: db[0].description
         }
       )
     } else {

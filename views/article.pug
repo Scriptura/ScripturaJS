@@ -4,62 +4,62 @@ block content
   main(itemprop='mainContentOfPage')
     .section
       .wrap
-        h1(itemprop='headline name').emphasized= name
+        h1(itemprop='headline name').emphasized= db[0].name
         .columns
           ul.list
             li
               strong Id: 
-              = id
+              = db[0].id
             li
               strong Date Created: 
-              = dateCreated
+              = db[0].date_created
             li
               strong Date Modified: 
-              = dateModified
+              = db[0].date_modified
             li
               strong Date Published: 
-              = datePublished
+              = db[0].datePublished
             li
               strong Description: 
-              = description
+              = db[0].description
             li
               strong Type: 
-              = type
+              = db[0].type
             li
               strong Slug: 
-              = slug
+              = db[0].slug
             li
               strong Meta Title: 
-              = metaTitle
+              = db[0].meta_title
             li
               strong Meta Description: 
-              = metaDescription
+              = db[0].meta_description
           ul.list
             li
               strong Description: 
-              = description
+              = db[0].description
             li
               strong Excerpt: 
-              = excerpt
+              = db[0].excerpt
             li
               strong Author Id: 
-              = authorId
+              = db[0].author_id
             li
               strong Contributors Id: 
-              = contributorsId
+              = db[0].contributors_id
             li
               strong Status: 
-              = status
+              = db[0].status
             li
               strong Comments Status: 
-              = commentsStatus
+              = db[0].comments_status
             li
               strong Comments Count: 
-              = commentsCount
+              = db[0].comments_count
             li
               strong Keywords Id: 
-              = keywordsId
+              = db[0].keywords_id
             li
               strong Medias Id: 
-              = mediasId
-        p= content
+              = db[0].medias_id
+        p= db[0].content
