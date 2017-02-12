@@ -40,10 +40,9 @@ if (config.dev){
 
 app.get('/', (req, res) => {
   //res.status(200) // 304 par défaut
-  let sql = 'SELECT * FROM _number_option WHERE id = \'1\''
+  let sql = 'SELECT * FROM _post WHERE id = \'1\''
   connection.query(sql, (error, results, fields) => {
-    let db = results[0]
-      , url = req.url
+    let url = req.url
     if (error) throw error
     res.render('patternLayouts',
       {
@@ -65,36 +64,34 @@ app.get('/article/:id([0-9]{1,7})', (req, res) => { // @example '/article/1'
     , inserts = req.params.id
   sql = mysql.format(sql, inserts)
   connection.query(sql, (error, results, fields) => {
-    let db = results[0]
-      , url = req.url
-    //console.log(db.date_created)
+    let url = req.url
     if (error) throw error
-    if (db) {
+    if (results[0]) {
       res.render('article',
         {
           dev: config.dev
           , url: url
           , demo: config.demo
           , siteUri: config.uri
-          , id: db.id
-          , name: db.name
-          , content: db.content
-          , dateCreated: db.date_created
-          , dateModified: db.date_modified
-          , datePublished: db.date_published
-          , type: db.type
-          , slug: db.slug
-          , metaTitle: db.meta_title
-          , metaDescription: db.meta_description
-          , description: db.description
-          , excerpt: db.excerpt
-          , authorId: db.author_id
-          , contributorsId: db.contributors_id
-          , status: db.status
-          , commentsStatus: db.comments_status
-          , commentsCount: db.comments_count
-          , keywordsId: db.keywords_id
-          , mediasId: db.medias_id
+          , id: results[0].id
+          , name: results[0].name
+          , content: results[0].content
+          , dateCreated: results[0].date_created
+          , dateModified: results[0].date_modified
+          , datePublished: results[0].date_published
+          , type: results[0].type
+          , slug: results[0].slug
+          , metaTitle: results[0].meta_title
+          , metaDescription: results[0].meta_description
+          , description: results[0].description
+          , excerpt: results[0].excerpt
+          , authorId: results[0].author_id
+          , contributorsId: results[0].contributors_id
+          , status: results[0].status
+          , commentsStatus: results[0].comments_status
+          , commentsCount: results[0].comments_count
+          , keywordsId: results[0].keywords_id
+          , mediasId: results[0].medias_id
         }
       )
     } else {
@@ -108,22 +105,42 @@ app.get('/person/:name([0-9a-zA-Z]{1,20})', (req, res) => { // @example '/person
     , inserts = req.params.name
   sql = mysql.format(sql, inserts)
   connection.query(sql, (error, results, fields) => {
-    let db = results[0]
-      , url = req.url
+    let url = req.url
     if (error) throw error
-    if (db) {
+    if (results[0]) {
       res.render('person',
         {
           dev: config.dev
           , url: url
-          , id: db.id
           , demo: config.demo
           , siteUri: config.uri
-          , metaTitle: db.given_name
-          , description: db.description
-          , givenName : db.given_name
-          , familyName : db.family_name
-          , name: db.honorific_prefix + ' ' + db.given_name + ' ' + db.family_name + ', ' + db.honorific_suffix
+          , name: results[0].honorific_prefix + ' ' + results[0].given_name + ' ' + results[0].family_name + ', ' + results[0].honorific_suffix
+          , id: results[0].id
+          , metaTitle: results[0].given_name
+          , givenName: results[0].given_name
+          , familyName: results[0].family_name
+          , additionalName: results[0].additional_name
+          , honorificPrefix: results[0].honorific_prefix
+          , honorificSuffix: results[0].honorific_suffix
+          , birthDate: results[0].birth_date
+          , birthPlaceId: results[0].birth_place_id
+          , deathDate: results[0].death_date
+          , deathPlaceId: results[0].death_place_id
+          , nationality: results[0].nationality
+          , placeId: results[0].place_id
+          , telephone: results[0].telephone
+          , telephone2: results[0].telephone2
+          , email: results[0].email
+          , fax: results[0].fax
+          //, url: results[0].url
+          , occupation: results[0].occupation
+          , bias: results[0].bias
+          , hobby: results[0].hobby
+          , organizationId: results[0].organization_id
+          , awward: results[0].awward
+          , mediasId: results[0].medias_id
+          , signature: results[0].signature
+          , description: results[0].description
         }
       )
     } else {
@@ -132,7 +149,7 @@ app.get('/person/:name([0-9a-zA-Z]{1,20})', (req, res) => { // @example '/person
   })
 })
 
-app.get('*', error404) // récupération des URLs ne correspondant a aucune des routes précédentes
+app.get('*', error404) // récupération des URLs ne correspondant a aucun des chemins de routage précédents
 
 function error404(req, res) {
   res.status(404)
