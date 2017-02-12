@@ -25,6 +25,8 @@
 // @link https://github.com/terlici/base-express
 // @documentation socketPath
 // @link https://github.com/mysqljs/mysql#connection-options
+// @documentation passportjs
+// @link http://www.supinfo.com/articles/single/3597-authentification-sur-une-api-nodejs-avec-passportjs-et-jwt
 
 'use strict'
 

@@ -42,7 +42,7 @@ app.get('/', (req, res) => {
   //res.status(200) // 304 par défaut
   let sql = 'SELECT * FROM _number_option WHERE id = \'1\''
   connection.query(sql, (error, results, fields) => {
-    let rs = results[0]
+    let db = results[0]
       , url = req.url
     if (error) throw error
     res.render('patternLayouts',
@@ -51,7 +51,7 @@ app.get('/', (req, res) => {
         , url: url
         , demo: config.demo
         , siteUri: config.uri
-        , title: config.name
+        , metaTitle: config.name
         , description: config.description
         , name: config.name
         , content: config.description
@@ -65,22 +65,36 @@ app.get('/article/:id([0-9]{1,7})', (req, res) => { // @example '/article/1'
     , inserts = req.params.id
   sql = mysql.format(sql, inserts)
   connection.query(sql, (error, results, fields) => {
-    let rs = results[0]
+    let db = results[0]
       , url = req.url
+    //console.log(db.date_created)
     if (error) throw error
-    if (rs) {
+    if (db) {
       res.render('article',
         {
           dev: config.dev
           , url: url
-          , id: rs.id
           , demo: config.demo
           , siteUri: config.uri
-          , title: rs.meta_title
-          , metaDescription: rs.meta_description
-          , description: rs.description
-          , name: rs.name
-          , content: rs.content
+          , id: db.id
+          , name: db.name
+          , content: db.content
+          , dateCreated: db.date_created
+          , dateModified: db.date_modified
+          , datePublished: db.date_published
+          , type: db.type
+          , slug: db.slug
+          , metaTitle: db.meta_title
+          , metaDescription: db.meta_description
+          , description: db.description
+          , excerpt: db.excerpt
+          , authorId: db.author_id
+          , contributorsId: db.contributors_id
+          , status: db.status
+          , commentsStatus: db.comments_status
+          , commentsCount: db.comments_count
+          , keywordsId: db.keywords_id
+          , mediasId: db.medias_id
         }
       )
     } else {
@@ -94,22 +108,22 @@ app.get('/person/:name([0-9a-zA-Z]{1,20})', (req, res) => { // @example '/person
     , inserts = req.params.name
   sql = mysql.format(sql, inserts)
   connection.query(sql, (error, results, fields) => {
-    let rs = results[0]
+    let db = results[0]
       , url = req.url
     if (error) throw error
-    if (rs) {
+    if (db) {
       res.render('person',
         {
           dev: config.dev
           , url: url
-          , id: rs.id
+          , id: db.id
           , demo: config.demo
           , siteUri: config.uri
-          , title: rs.given_name
-          , description: rs.description
-          , givenName : rs.given_name
-          , familyName : rs.family_name
-          , name: rs.honorific_prefix + ' ' + rs.given_name + ' ' + rs.family_name + ', ' + rs.honorific_suffix
+          , metaTitle: db.given_name
+          , description: db.description
+          , givenName : db.given_name
+          , familyName : db.family_name
+          , name: db.honorific_prefix + ' ' + db.given_name + ' ' + db.family_name + ', ' + db.honorific_suffix
         }
       )
     } else {
@@ -122,7 +136,7 @@ app.get('*', error404) // récupération des URLs ne correspondant a aucune des 
 
 function error404(req, res) {
   res.status(404)
-  res.render('patternLayouts',
+  res.render('404',
     {
       dev: config.dev
       , demo: config.demo

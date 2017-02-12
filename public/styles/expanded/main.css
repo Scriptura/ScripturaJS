@@ -3664,6 +3664,21 @@ form [class^="columns"] > div {
       transform: translateY(-0.3rem);
     }
 }
+@-moz-keyframes animJump {
+    30% {
+      transform: translateY(-0.3rem);
+    }
+}
+@-webkit-keyframes animJump {
+    30% {
+      transform: translateY(-0.3rem);
+    }
+}
+@-o-keyframes animJump {
+    30% {
+      transform: translateY(-0.3rem);
+    }
+}
 @keyframes animJump {
     30% {
       transform: translateY(-0.3rem);
@@ -3738,6 +3753,30 @@ form [class^="columns"] > div {
   .login .active .avatar {
     animation: animLogin 5s ease-in-out infinite;
   }
+@-moz-keyframes animLogin {
+    0% {
+      transform: rotate(0deg);
+    }
+    10%, 100% {
+      transform: rotate(360deg);
+    }
+}
+@-webkit-keyframes animLogin {
+    0% {
+      transform: rotate(0deg);
+    }
+    10%, 100% {
+      transform: rotate(360deg);
+    }
+}
+@-o-keyframes animLogin {
+    0% {
+      transform: rotate(0deg);
+    }
+    10%, 100% {
+      transform: rotate(360deg);
+    }
+}
 @-moz-keyframes animLogin {
     0% {
       transform: rotate(0deg);
@@ -4562,6 +4601,189 @@ a:active .magimg {
 }
 .progress:nth-child(4n+4) div {
   background-color: #7ca166;
+}
+@-moz-keyframes animList {
+  50% {
+    transform: scale(1.03) translateZ(0);
+  }
+}
+@-webkit-keyframes animList {
+  50% {
+    transform: scale(1.03) translateZ(0);
+  }
+}
+@-o-keyframes animList {
+  50% {
+    transform: scale(1.03) translateZ(0);
+  }
+}
+@-moz-keyframes animRotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes animRotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes animRotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@-moz-keyframes animInvalidInput {
+  0% {
+    border-color: #b03c57;
+  }
+  50% {
+    border-color: Orange;
+  }
+  100% {
+    border-color: #b03c57;
+  }
+}
+@-webkit-keyframes animInvalidInput {
+  0% {
+    border-color: #b03c57;
+  }
+  50% {
+    border-color: Orange;
+  }
+  100% {
+    border-color: #b03c57;
+  }
+}
+@-o-keyframes animInvalidInput {
+  0% {
+    border-color: #b03c57;
+  }
+  50% {
+    border-color: Orange;
+  }
+  100% {
+    border-color: #b03c57;
+  }
+}
+@-moz-keyframes animAjaxContent {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@-webkit-keyframes animAjaxContent {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@-o-keyframes animAjaxContent {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@-moz-keyframes animLoader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes animLoader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes animLoader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@-moz-keyframes animLoader3 {
+  40% {
+    box-shadow: 0 4em 0 0 #b03c57;
+  }
+  0%, 60%, 100% {
+    box-shadow: 0 4em 0 -0.5em transparent;
+  }
+}
+@-webkit-keyframes animLoader3 {
+  40% {
+    box-shadow: 0 4em 0 0 #b03c57;
+  }
+  0%, 60%, 100% {
+    box-shadow: 0 4em 0 -0.5em transparent;
+  }
+}
+@-o-keyframes animLoader3 {
+  40% {
+    box-shadow: 0 4em 0 0 #b03c57;
+  }
+  0%, 60%, 100% {
+    box-shadow: 0 4em 0 -0.5em transparent;
+  }
+}
+@-moz-keyframes animBlink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+@-webkit-keyframes animBlink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+@-o-keyframes animBlink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+@-moz-keyframes animUnveiling {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes animUnveiling {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-o-keyframes animUnveiling {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 @-moz-keyframes animList {
   50% {
