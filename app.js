@@ -108,6 +108,7 @@ app.get('/person/:name([0-9a-zA-Z]{1,20})', (req, res) => { // @example '/person
           , siteUri: config.uri
           , metaTitle: 'Fiche de ' + db[0].given_name + ' ' + db[0].family_name
           , metaDescription: db[0].description
+          , description: marked(db[0].description)
         }
       )
     } else {
