@@ -23,7 +23,8 @@ const config = require('./config')
       , database: config.database
       , socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock' // for MAMP only
     }
-  )
+    )
+  , marked = require('marked') // for markdown
 
 //app.set('port', config.port)
 app.set('views', config.dir + '/views/') // racine pour les vues
@@ -55,7 +56,7 @@ app.get('/', (req, res) => {
           , metaTitle: config.name
           , description: config.description
           , name: config.name
-          , content: config.description
+          , content: marked(config.description)
         }
       )
     }
@@ -80,6 +81,7 @@ app.get('/article/:id([0-9]{1,7})', (req, res) => { // @example '/article/1'
           , siteUri: config.uri
           , metaTitle: db[0].name
           , metaDescription: db[0].description
+          , content: marked(db[0].content)
         }
       )
     } else {
