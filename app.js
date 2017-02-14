@@ -45,18 +45,20 @@ app.get('/', (req, res) => {
     let db = results
       , url = req.url
     if (error) throw error
-    res.render('patternLayouts',
-      {
-        dev: config.dev
-        , url: url
-        , demo: config.demo
-        , siteUri: config.uri
-        , metaTitle: config.name
-        , description: config.description
-        , name: config.name
-        , content: config.description
-      }
-    )
+    if (db[0]) {
+      res.render('patternLayouts',
+        {
+          dev: config.dev
+          , url: url
+          , demo: config.demo
+          , siteUri: config.uri
+          , metaTitle: config.name
+          , description: config.description
+          , name: config.name
+          , content: config.description
+        }
+      )
+    }
   })
 })
 
@@ -68,7 +70,7 @@ app.get('/article/:id([0-9]{1,7})', (req, res) => { // @example '/article/1'
     let db = results
       , url = req.url
     if (error) throw error
-    if (db) {
+    if (db[0]) {
       res.render('article',
         {
           db: db
@@ -94,7 +96,7 @@ app.get('/person/:name([0-9a-zA-Z]{1,20})', (req, res) => { // @example '/person
     let url = req.url
       , db = results
     if (error) throw error
-    if (db) {
+    if (db[0]) {
       res.render('person',
         {
           db: db
@@ -121,7 +123,7 @@ function error404(req, res) {
       dev: config.dev
       , demo: config.demo
       , siteUri: config.uri
-      , title: 'Error 404'
+      , metaTitle: 'Error 404'
       , description: 'Error 404, Page not found'
       , name: 'Error 404'
       , content: 'Page not found'
